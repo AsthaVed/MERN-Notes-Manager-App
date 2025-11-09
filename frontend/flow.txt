@@ -1,0 +1,189 @@
+📅 Day-Wise Learning & Building Plan (7 Days)
+✅ Day 1 — Project Setup + UI Layout
+
+Goal: Setup MERN + create basic UI pages
+
+Tasks
+-> Create React app + Tailwind setup
+-> Make folder structure
+src/
+ ├── pages
+ ├── components
+ ├── context (later)
+ └── utils
+-> Create pages (empty UI):
+    Login
+    Signup
+    Notes page
+    Add/Edit Note modal component
+-> Create Navbar UI
+-> Add Routes (react-router-dom)
+-> Add dummy notes cards (hard-coded)
+
+Learning:
+Tailwind layouts
+React routing
+UI planning
+
+✅ Day 2 — Backend Setup + Database
+
+Goal: Setup backend + MongoDB + models
+
+Tasks
+
+Create Node + Express backend
+
+Connect MongoDB using mongoose
+
+Build user model (name, email, password)
+
+Build notes model (title, description, pinned, userId)
+
+.env setup for DB and JWT_SECRET
+
+Learning:
+
+Express setup
+
+MongoDB schema design
+
+.env usage
+
+✅ Day 3 — Auth Backend
+
+Goal: User login/signup API + JWT
+
+Tasks
+
+Signup API
+
+Hash password (bcrypt)
+
+Login API
+
+Generate JWT token
+
+Store cookie token
+
+Create middleware verifyUser
+
+Learning:
+
+Auth system basics
+
+JWT verify & protect API
+
+Cookies vs LocalStorage
+
+✅ Day 4 — Connect Auth to Frontend
+
+Goal: Login & Signup working in UI
+
+Tasks:
+
+Create axios instance
+
+Signup form send data to API
+
+Login form send data to API
+
+On success → store token in cookie
+
+Protect Notes page (if no login redirect to /login)
+
+Learning:
+
+Controlled forms
+
+Axios handling
+
+Protected routes
+
+✅ Day 5 — Notes CRUD
+
+Goal: Create notes features
+
+Tasks
+
+API: Create note
+
+API: Get notes (only user’s notes)
+
+UI: Show notes list
+
+Form modal → add new note
+
+Delete note + confirm popup
+
+Update note in modal
+
+Learning
+
+CRUD operations
+
+Modal form handling
+
+Re-render logic
+
+✅ Day 6 — Pin + Search + Sort
+
+Goal: Add smart features to feel pro app
+
+Tasks
+
+Button to pin note
+
+Pinned at top, rest below
+
+Search bar (filter notes by title / text)
+
+Sort notes (newest first)
+
+Bonus
+
+Toast notifications (react-hot-toast)
+
+Learning
+
+Filter & sorting logic
+
+UI state handling
+
+Toasts, UX improvements
+
+✅ Day 7 — Finishing & Deployment
+
+Goal: Host + final polish
+
+Tasks
+
+Add logout
+
+Add loading states
+
+Responsive UI check
+
+Deployment
+
+Frontend → Vercel
+
+Backend → Render / Railway
+
+MongoDB Atlas
+
+Learning
+
+Deployment workflow
+
+Environment variables online
+
+🚀 Your Final Features
+Feature	Status
+Login / Signup	✅
+JWT Auth + Cookies	✅
+Protected Routes	✅
+CRUD Notes	✅
+Pin Notes	✅
+Search Notes	✅
+Modal + Toast UI	✅
+Deploy Live	✅
