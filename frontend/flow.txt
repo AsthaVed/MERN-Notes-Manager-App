@@ -42,11 +42,8 @@ Build notes model (title, description, pinned, userId)
 .env setup for DB and JWT_SECRET
 
 Learning:
-
 Express setup
-
 MongoDB schema design
-
 .env usage
 
 ✅ Day 3 — Auth Backend
@@ -68,11 +65,8 @@ Store cookie token
 Create middleware verifyUser
 
 Learning:
-
 Auth system basics
-
 JWT verify & protect API
-
 Cookies vs LocalStorage
 
 ✅ Day 4 — Connect Auth to Frontend
@@ -187,3 +181,93 @@ Pin Notes	✅
 Search Notes	✅
 Modal + Toast UI	✅
 Deploy Live	✅
+
+
+1️⃣ Navbar
+---------------------------------------------------
+| Notes Manager                     Notes | Login |
+---------------------------------------------------
+Left: App Name / Logo
+
+Right: Links (Notes, Login / Logout)
+
+Tailwind hints:
+
+Container: flex justify-between items-center px-6 py-4 bg-white shadow-md
+
+Links: text-gray-700 hover:text-blue-600 transition-colors
+
+2️⃣ Login Page
+markdown
+Copy code
+-------------------------------
+|          Login              |
+|-----------------------------|
+| Email:     [_____________]  |
+| Password:  [_____________]  |
+| [Login Button]             |
+| Don't have account? Signup |
+-------------------------------
+Card: max-w-sm mx-auto mt-20 p-6 bg-white rounded-lg shadow-lg
+
+Inputs: border rounded p-2 w-full mb-4
+
+Button: bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full
+
+3️⃣ Signup Page
+markdown
+Copy code
+-------------------------------
+|          Signup             |
+|-----------------------------|
+| Name:      [___________]    |
+| Email:     [___________]    |
+| Password:  [___________]    |
+| Confirm:   [___________]    |
+| [Signup Button]             |
+| Already have account? Login |
+-------------------------------
+Same styling as Login, just more fields
+
+4️⃣ Notes Page (Grid layout)
+markdown
+Copy code
+---------------------------------------------------
+| Navbar                                           |
+---------------------------------------------------
+| [Add Note]                                      |
+---------------------------------------------------
+| Card 1  | Card 2  | Card 3 | Card 4            |
+| Title   | Title   | Title  | Title             |
+| Desc    | Desc    | Desc   | Desc              |
+| Edit/Delete buttons                           |
+---------------------------------------------------
+Tailwind hints:
+
+Grid container: grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4
+
+Card: bg-white p-4 shadow-lg rounded-lg
+
+Card buttons: bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded (Edit) and bg-red-600 hover:bg-red-700 px-4 py-2 rounded (Delete)
+
+Add Note button: bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4
+
+5️⃣ Add/Edit Note Modal (Optional visual)
+markdown
+Copy code
+-----------------------------
+|      Add / Edit Note      |
+|---------------------------|
+| Title:       [_________]  |
+| Description: [_________]  |
+| [Save] [Cancel]           |
+-----------------------------
+
+
+spread object works in {} only, not in [].
+
+const obj1 = { a: 1, b: 2, a: 3 }
+console.log(obj1);
+output = { a: 3, b: 2 }
+Why?
+Duplicate keys → last one wins

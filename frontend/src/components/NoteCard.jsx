@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NoteCard({id, title, description}) {
+const NoteCard = React.memo(({id, title, description, onEdit}) => {
 //   console.log(id)
   return (
     <>
@@ -9,12 +9,12 @@ function NoteCard({id, title, description}) {
         <h1 className='text-xl sm:text-2xl font-bold mb-2'>{title}</h1>
         <p className='text-gray-700 mb-4'>{description}</p>
         <div className='flex gap-2'>
-            <button className='bg-blue-600 hover:bg-blue-700 rounded-lg text-white outline-none px-6 py-2'>Edit</button>
+            <button className='bg-blue-600 hover:bg-blue-700 rounded-lg text-white outline-none px-6 py-2' onClick={onEdit}>Edit</button>
         <button className='bg-orange-500 hover:bg-orange-600 rounded-lg text-white outline-none px-6 py-2'>Delete</button>
         </div>
     </div>
     </>
   )
-}
+})
 
 export default NoteCard
