@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function SignUp({setLogin}) {
+function SignUp({setLogin, login}) {
   const [signupForm, setSignupForm] = useState({
     name: "",
     email: "",
@@ -14,6 +14,12 @@ function SignUp({setLogin}) {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
   console.log(API_URL);
+
+   useEffect(() => {
+    if (login) {
+      navigate("/");
+    }
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;

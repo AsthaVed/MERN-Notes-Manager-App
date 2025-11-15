@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login({setLogin}) {
+function Login({setLogin, login}) {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [hideShow, setHideShow] = useState(false);
   const navigate = useNavigate();
+
+   useEffect(() => {
+    if (login) {
+      navigate("/");
+    }
+  });
 
   const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 

@@ -5,6 +5,7 @@ function Navbar({login, setLogin}) {
 
   const handleLogout = () => {
     localStorage.removeItem("login");
+    document.cookie = "token=; path=/; expires=0;";
     setLogin(false)
     return <Navigate to="/login" replace />
   }

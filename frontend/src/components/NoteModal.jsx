@@ -1,32 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-const  NoteModal = React.memo(({ isOpen, onClose, note, onSave, setSelectedNote }) => {
+const NoteModal = React.memo(({ isOpen, onClose, note, onSave, setNotes }) => {
   // Local state for title & description
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  // const [title, setTitle] = useState('');
+  // const [description, setDescription] = useState('');
+  const [modalNote, setModalNote] = useState({ title: "", description: "" });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setModalNote((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Populate fields when modal opens with existing note
   useEffect(() => {
+    // console.log("modal log", note);
     if (note) {
-      setTitle(note.title);
-      setDescription(note.description);
+      setModalNote({
+        title: note.title || "",
+        description: note.description || "",
+      });
     } else {
-      setTitle('');
-      setDescription('');
+      setModalNote({ title: "", description: "" });
     }
   }, [note]);
 
   if (!isOpen) return null;
+  const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
-  const handleSave = () => {
-    const newNote = {
-      id: note ? note.id : Date.now(), // new id for add
-      title,
-      description,
-    };
-    onSave(newNote);
-    setDescription('');
-    setTitle('')
+  const handleSave = async () => {
+    // const newNote = {
+    //   id: note ? note.id : Date.now(), // new id for add
+    //   title,
+    //   description,
+    // };
+    if (note) {
+      // Edit existing note
+      const res = await axios.put(
+        `${API_URL}/update/notes/${note._id}`,
+        modalNote,
+        { withCredentials: "include" }
+      );
+      // Update note in state
+      setNotes((prev) =>
+        prev.map((n) => (n._id === note._id ? res.data.note : n))
+      );
+      alert(res.data.msg);
+    } else {
+      try {
+        const res = await axios.post(`${API_URL}/post/notes`, modalNote, {
+          withCredentials: "include",
+        });
+        console.log("notes", res.data.note);
+        setNotes((prev) => [...prev, res.data.note]);
+        setModalNote({ title: "", description: "" });
+        alert(res.data.msg);
+      } catch (err) {
+        alert(err.response);
+      }
+    }
+    // onSave(newNote);
+
     onClose();
   };
 
@@ -36,42 +70,48 @@ const  NoteModal = React.memo(({ isOpen, onClose, note, onSave, setSelectedNote 
 
       {/* fixed - element ko bowser window k acco. fix kr deta h scroll krne pr bhi nhi hota */}
       <div className="bg-white rounded-lg p-6 w-11/12 max-w-md">
-      {/* w-(kitne columns lene hain) / (total 12 columns) */}
+        {/* w-(kitne columns lene hain) / (total 12 columns) */}
         <h2 className="text-xl font-bold mb-4">
-          {note ? 'Edit Note' : 'Add Note'}
+          {note ? "Edit Note" : "Add Note"}
         </h2>
 
         <input
           className="focus:ring-2 focus:ring-blue-500 border w-full p-2 rounded mb-4 outline-none"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          value={modalNote.title}
+          onChange={handleInput}
           placeholder="Title"
         />
         <textarea
           className="focus:ring-2 focus:ring-blue-500 border w-full p-2 rounded mb-4 outline-none"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          value={modalNote.description}
+          onChange={handleInput}
           placeholder="Description"
         />
 
         <div className="flex justify-end gap-2">
           <button
             className="px-4 py-2 bg-gray-300 rounded"
-            onClick={() => {setDescription(''); setDescription(''); onClose();}}
+            onClick={() => {
+              if (!note) setModalNote({ title: "", description: "" });
+              onClose();
+            }}
           >
             Cancel
           </button>
-          <button type='submit'
+          <button
+            type="submit"
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={handleSave}
           >
-            {note ? 'Save Changes' : 'Add Note'}
+            {note ? "Save Changes" : "Add Note"}
           </button>
           {/* <button onClick={() => { onSave({ id, title, description }); onClose(); }}> Save </button> y bhi kr skte the direct*/}
         </div>
       </div>
     </div>
   );
-})
+});
 
 export default NoteModal;
