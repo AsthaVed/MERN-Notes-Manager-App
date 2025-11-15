@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { toast } from 'react-hot-toast';
 
 const NoteModal = React.memo(({ isOpen, onClose, note, onSave, setNotes }) => {
   // Local state for title & description
@@ -36,6 +37,7 @@ const NoteModal = React.memo(({ isOpen, onClose, note, onSave, setNotes }) => {
     // };
     if (note) {
       // Edit existing note
+      try{
       const res = await axios.put(
         `${API_URL}/update/notes/${note._id}`,
         modalNote,
@@ -45,7 +47,12 @@ const NoteModal = React.memo(({ isOpen, onClose, note, onSave, setNotes }) => {
       setNotes((prev) =>
         prev.map((n) => (n._id === note._id ? res.data.note : n))
       );
-      alert(res.data.msg);
+      // alert(res.data.msg);
+      toast.success(res.data.msg);
+      } catch (err) {
+        // alert(err.response);
+        toast.error(err.response);
+      }
     } else {
       try {
         const res = await axios.post(`${API_URL}/post/notes`, modalNote, {
@@ -54,9 +61,11 @@ const NoteModal = React.memo(({ isOpen, onClose, note, onSave, setNotes }) => {
         console.log("notes", res.data.note);
         setNotes((prev) => [...prev, res.data.note]);
         setModalNote({ title: "", description: "" });
-        alert(res.data.msg);
+        // alert(res.data.msg);
+        toast.success(res.data.msg);
       } catch (err) {
-        alert(err.response);
+        // alert(err.response);
+        toast.error(err.response);
       }
     }
     // onSave(newNote);

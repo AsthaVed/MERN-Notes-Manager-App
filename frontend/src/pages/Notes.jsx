@@ -3,6 +3,7 @@ import NoteCard from "../components/NoteCard";
 import NoteModal from '../components/NoteModal';
 import { useEffect } from "react";
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 function Notes() {
   const [notes, setNotes] = useState([]);
@@ -17,10 +18,10 @@ useEffect(() => {
   async function fetchNotes() {
     try {
       const res = await axios.get(`${API_URL}/get/notes`, { withCredentials: true });
-      console.log("res notes", res.data.notes);
+      // console.log("res notes", res.data.notes);
       if(res.data.success) setNotes(res.data.notes);
     } catch (err) {
-      console.error(err);
+      toast.error(err);
     }
   }
   fetchNotes();
@@ -97,7 +98,7 @@ useEffect(() => {
             );
           })): (
     <h1 className="text-2xl w-full col-span-full text-center">
-      No notes available. Add a new note to get started!
+      {search ? "No notes match your search." : "No notes available. Add a new note to get started!"}
     </h1>
   )}
       </div>

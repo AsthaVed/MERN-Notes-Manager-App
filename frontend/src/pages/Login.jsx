@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 function Login({setLogin, login}) {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -30,13 +31,14 @@ function Login({setLogin, login}) {
       localStorage.setItem("login", loginForm.email);
         setLogin(true); // Update state immediately
         navigate("/");
-      alert(res.data.msg);
+      toast.success(res.data.msg);
     } else {
-      alert(res.data.msg);
+      toast.error(res.data.msg);
     }
     // alert(loginForm.email);
   }catch (err) {
-  alert(err.response.data.msg);
+    toast.error(err.response);
+  // alert(err.response.data.msg);
 }
   };
   return (

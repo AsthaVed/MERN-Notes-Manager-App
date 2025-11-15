@@ -29,7 +29,13 @@ app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   const userData = req.body;
   try {
-    if (email && userData) {
+    if (!email || !password ) {
+      return res.status(200).json({
+        msg: "Enter all the fields",
+        success: false,
+      });
+    } else {
+    
       // Find user
       const user = await User.findOne({ email });
       if (!user) {
@@ -59,12 +65,7 @@ app.post("/api/login", async (req, res) => {
           token: token,
         });
       });
-    } else {
-      return res.status(200).json({
-        msg: "Enter all the fields",
-        success: false,
-      });
-    }
+    } 
   } catch (err) {
     return res.status(500).json({
       msg: err.message,

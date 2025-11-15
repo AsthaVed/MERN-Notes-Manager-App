@@ -15,9 +15,11 @@ const handleDeleteNote = async (id) => {
     console.log("delete", res.data);
      // Remove note from state after deletion
     setNotes((prev) => prev.filter((note) => note._id !== id));
-    alert(res.data.msg)
+    // alert(res.data.msg)
+    toast.success(res.data.msg)
     }catch(err){
-            console.log("Error:", err.response?.data || err.message);
+            // console.log("Error:", err.response?.data || err.message);
+            toast.error("Error:", err.response?.data || err.message)
         }
 }
 
