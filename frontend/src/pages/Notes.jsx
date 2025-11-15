@@ -52,6 +52,7 @@ const [selectedNote, setSelectedNote] = useState(null);
           Add Note
         </button>
       </div>
+      {/* Show all notes */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4">
         {notes &&
           notes.map((note) => {
@@ -59,6 +60,8 @@ const [selectedNote, setSelectedNote] = useState(null);
               <NoteCard
                 key={note.id}
                 {...note}
+                setSelectedNote = {setSelectedNote}
+                selectedNote = {selectedNote}
                 onEdit={() => {
                   setSelectedNote(note);
                   setModalOpen(true);
@@ -67,7 +70,9 @@ const [selectedNote, setSelectedNote] = useState(null);
             );
           })}
       </div>
+      {/* modal edit/add */}
       <NoteModal
+        setSelectedNote = {setSelectedNote}
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         note={selectedNote}

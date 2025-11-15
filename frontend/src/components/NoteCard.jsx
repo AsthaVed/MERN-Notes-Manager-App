@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NoteCard = React.memo(({id, title, description, onEdit}) => {
+const NoteCard = React.memo(({id, title, description, onEdit, setSelectedNote, selectedNote}) => {
 //   console.log(id)
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const  NoteModal = React.memo(({ isOpen, onClose, note, onSave }) => {
+const  NoteModal = React.memo(({ isOpen, onClose, note, onSave, setSelectedNote }) => {
   // Local state for title & description
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -61,7 +61,7 @@ const  NoteModal = React.memo(({ isOpen, onClose, note, onSave }) => {
           >
             Cancel
           </button>
-          <button
+          <button type='submit'
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={handleSave}
           >
