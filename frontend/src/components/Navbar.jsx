@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar({login, setLogin}) {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("login");
     document.cookie = "token=; path=/; expires=0;";
     setLogin(false)
-    return <Navigate to="/login" replace />
+    navigate("/login", { replace: true }); // redirect programmatically
   }
 
   return (

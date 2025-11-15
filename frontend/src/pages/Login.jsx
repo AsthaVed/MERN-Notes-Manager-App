@@ -37,8 +37,10 @@ function Login({setLogin, login}) {
     }
     // alert(loginForm.email);
   }catch (err) {
-    toast.error(err.response);
-  // alert(err.response.data.msg);
+    // toast.error(err.response);
+  // alert(err.response.data.msg)
+  const msg = err.response?.data?.msg || err.response || "Something went wrong";
+  toast.error(msg);;
 }
   };
   return (
